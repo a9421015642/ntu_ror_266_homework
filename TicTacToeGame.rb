@@ -8,6 +8,7 @@ class TicTacToe
   def intro
     #印出開場畫面，告訴玩家遊戲規則
     puts "兩個玩家，一個打圈(O)，一個打叉(X)，輪流在3乘3的格上打自己的符號，最先以橫、直、斜連成一線則為勝"
+    puts "Input 1 ~ 9"
     puts "  |  |   "
     puts "--------"
     puts "  |  |  "
@@ -22,7 +23,7 @@ class TicTacToe
     begin
       user_inputs(array)
       compter_inputs(array)
-         #------宣告井字格子------
+      #------宣告井字格子------
       puts " #{array[0]}| #{array[1]}| #{array[2]}  "
       puts "--------"
       puts " #{array[3]}| #{array[4]}| #{array[5]}  "
@@ -44,10 +45,11 @@ class TicTacToe
   end
  #---------------------------------------------------------------------------------------------------------#
   def compter_inputs array
-   begin    #------computer_input 判斷不重複輸入------
+    begin    #------computer_input 判斷不重複輸入------
         computer_int = rand(1..9)-1    
+        #井字都填滿OX就return (跳出begin....end while)
         if (array[0] != " " &&array[1] != " "&&array[2] != " "&&array[3] != " "&&array[4] != " "&&array[5] != " "&&array[6] != " "&&array[7] != " "&&array[8] != " ")  then  return    end
-       end while array[computer_int] != " "
+    end while array[computer_int] != " "
         array[computer_int] = "X"
   end
  #---------------------------------------------------------------------------------------------------------#
@@ -67,37 +69,39 @@ class TicTacToe
 #---------------------------------------------------------------------------------------------------------#
   def show_message array
     #印出結果
-            #------user_input 輸入3 次以上 , 才判斷是否有連線成功****************************
-      if (@@user_count >=3 ? true : false)
-        if (connection(array) == "O") then   puts "win"
-        elsif  (connection(array) == "X") then   puts "lose"
-        elsif  (connection(array) == " " &&  @@user_count  >= 5 ) then   puts "tie"
-        end
+    #------user_input 輸入3 次以上 , 才開始判斷是否有連線成功？
+    if (@@user_count >=3 ? true : false)
+      if (connection(array) == "O") then   puts "win"
+      elsif  (connection(array) == "X") then   puts "lose"
+      elsif  (connection(array) == " " &&  @@user_count  >= 5 ) then   puts "tie"
       end
+    end
   end
 #---------------------------------------------------------------------------------------------------------#
  #判斷是否有連線成功
   def connection  array    
     i = 0
-while i < 3
-      #判斷橫 :  0 1 2  , 3 4 5 , 6 7 8
+    while i < 3
+      #判斷橫 :  0 1 2  , 3 4 5 , 6 7 8     (是否有連成一線)
       if  (array[3*i]=="O" && array[3*i+1]=="O" && array[3*i+2]=="O")  then   return  "O"
       elsif  (array[3*i]=="X" && array[3*i+1]=="X" && array[3*i+2]=="X")  then  return "X"
       end
-      #判斷直 : 0 3 6, 1 4 7 , 2 5 8
+      #判斷直 : 0 3 6, 1 4 7 , 2 5 8       (是否有連成一線)
       if  (array[i]=="O" &&array[i+3]=="O" &&array[i+6]=="O")  then  return  "O"
       elsif (array[i]=="X" &&array[i+3]=="X" &&array[i+6]=="X" ) then  return "X"
       end
-   i +=1
- end
-     #判斷斜 : 0 4 8 , 2 4 6 , 最後都不是回傳" "
-      if  (array[0]=="O" &&array[4]=="O" &&array[8]=="O") then return  "O"
-      elsif  (array[2]=="O" &&array[4]=="O" &&array[6]=="O") then return  "O"
-      elsif  (array[2]=="X" &&array[4]=="X" &&array[6]=="X") then return "X"
-      elsif  (array[2]=="X" &&array[4]=="X" &&array[6]=="X") then return "X"
-      else return " "
-      end
+    i +=1
+  end
+    #判斷斜 : 0 4 8 , 2 4 6    (是否有連成一線)  , 最後都沒連線成功就回傳" "
+    if  (array[0]=="O" &&array[4]=="O" &&array[8]=="O") then return  "O"
+    elsif  (array[2]=="O" &&array[4]=="O" &&array[6]=="O") then return  "O"
+    elsif  (array[2]=="X" &&array[4]=="X" &&array[6]=="X") then return "X"
+    elsif  (array[2]=="X" &&array[4]=="X" &&array[6]=="X") then return "X"
+    else return " "
+    end
   end
 #---------------------------------------------------------------------------------------------------------#
 end
+# ------------Main Program Starts Here ---------------------
+# 主程式只要一行即可
 TicTacToe.new
