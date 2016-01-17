@@ -30,12 +30,14 @@ class RPS
     puts "|===============================================|" 
     puts "|Welcome to Rock Paper Scissors!!!              |"
     puts "|===============================================|"
-    puts "please choose one of the following: R / P / S"
   end
   #---------------------------------------------------------------------------------------------------------#
   def decide(human_input,computer_input)
     #邏輯判斷式
-    human_input_rps = human_input.get_gesture
+     begin 
+      puts "please choose one of the following: R / P / S"
+      human_input_rps = human_input.get_gesture
+    end while !["R", "P", "S"].include?(human_input_rps) 
     case human_input_rps
       when "R" then  user_int =  1 
       when "P" then  user_int =  2   
