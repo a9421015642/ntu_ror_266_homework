@@ -46,9 +46,9 @@ class TicTacToe
  #---------------------------------------------------------------------------------------------------------#
   def compter_inputs array
     begin    #------computer_input 判斷不重複輸入------
-        computer_int = rand(1..9)-1    
-        #井字都填滿OX就return (跳出begin....end while)
-        if (array[0] != " " &&array[1] != " "&&array[2] != " "&&array[3] != " "&&array[4] != " "&&array[5] != " "&&array[6] != " "&&array[7] != " "&&array[8] != " ")  then  return    end
+      computer_int = rand(1..9)-1    
+      #井字都填滿OX就return (跳出begin....end while)
+      if (array[0] != " " &&array[1] != " "&&array[2] != " "&&array[3] != " "&&array[4] != " "&&array[5] != " "&&array[6] != " "&&array[7] != " "&&array[8] != " ")  then  return    end
     end while array[computer_int] != " "
         array[computer_int] = "X"
   end
